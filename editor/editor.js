@@ -380,9 +380,8 @@ async function serveStatic(response, url) {
         const stats = await fsp.stat(filePath);
         if (!stats.isFile()) return sendPlain(response, 404, 'Not Found');
         const extension = path.extname(filePath).toLowerCase();
-        const isEditorFile = filePath === path.join(ROOT_DIR, 'editor', 'index.html') || filePath === path.join(ROOT_DIR, 'editor', 'index.js') || filePath === path.join(ROOT_DIR, 'editor', 'index.css');
         response.writeHead(200, {
-            'Cache-Control': isEditorFile ? 'no-store' : 'public, max-age=300',
+            'Cache-Control': 'no-store',
             'Content-Type': MIME_TYPES[extension] || 'application/octet-stream'
         });
         fs.createReadStream(filePath).pipe(response);
