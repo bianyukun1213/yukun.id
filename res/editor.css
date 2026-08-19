@@ -1,0 +1,316 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light dark;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f5f5;
+    color: #202124;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+select,
+input,
+textarea {
+    border: 1px solid #aeb4bb;
+    border-radius: .35rem;
+    background: #fff;
+    color: inherit;
+}
+
+button,
+select,
+input {
+    min-height: 2.4rem;
+    padding: .35rem .6rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+    border-color: #3569aa;
+}
+
+button:disabled {
+    cursor: wait;
+    opacity: .55;
+}
+
+a {
+    color: #155d9c;
+}
+
+.toolbar {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    display: grid;
+    grid-template-columns: minmax(15rem, 1fr) auto;
+    gap: .75rem 1.25rem;
+    padding: 1rem max(1rem, calc((100vw - 1600px) / 2));
+    background: #fff;
+    border-bottom: 1px solid #d2d6da;
+    box-shadow: 0 1px 8px #00000012;
+}
+
+.toolbar h1,
+.toolbar p {
+    margin: 0;
+}
+
+.toolbar h1 {
+    font-size: 1.25rem;
+}
+
+.toolbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+#save-button {
+    border-color: #176945;
+    background: #176945;
+    color: white;
+}
+
+.status {
+    grid-column: 1 / -1;
+    min-height: 1.2rem;
+    font-size: .9rem;
+}
+
+.status.error {
+    color: #aa1b1b;
+}
+
+.status.success {
+    color: #176945;
+}
+
+.muted,
+.help,
+.loading {
+    color: #5b626a;
+    font-size: .9rem;
+}
+
+.panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.panel {
+    min-width: 0;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #d2d6da;
+    border-radius: .6rem;
+}
+
+.panel-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid #e2e5e8;
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.field,
+.array-item,
+fieldset {
+    margin-top: 1rem;
+}
+
+.field {
+    display: grid;
+    gap: .35rem;
+}
+
+.field label,
+legend {
+    font-weight: 650;
+}
+
+textarea {
+    width: 100%;
+    min-height: 5.5rem;
+    padding: .55rem;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+input,
+select {
+    width: 100%;
+}
+
+fieldset {
+    min-width: 0;
+    padding: .8rem;
+    border: 1px solid #cbd1d7;
+    border-radius: .45rem;
+}
+
+legend {
+    padding: 0 .3rem;
+}
+
+.array-actions,
+.item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-top: .75rem;
+}
+
+.array-item {
+    padding: .75rem;
+    border: 1px solid #d7dce0;
+    border-radius: .4rem;
+    background: #fafbfc;
+}
+
+.item-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    margin: 0;
+    font-weight: 650;
+}
+
+.danger {
+    color: #9d1a1a;
+}
+
+.markdown-editor {
+    min-height: 18rem;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: .9rem;
+}
+
+.preview {
+    min-height: 10rem;
+    max-height: 36rem;
+    overflow: auto;
+    padding: .9rem;
+    border: 1px solid #cbd1d7;
+    border-radius: .35rem;
+    background: #fafbfc;
+    line-height: 1.65;
+}
+
+.preview img {
+    max-width: 100%;
+    height: auto;
+}
+
+.preview pre {
+    overflow: auto;
+}
+
+.preview iframe,
+.preview script,
+.preview style,
+.preview object,
+.preview embed {
+    display: none;
+}
+
+.field-error {
+    color: #aa1b1b;
+    font-size: .85rem;
+}
+
+.invalid {
+    border-color: #aa1b1b;
+    outline: 2px solid #aa1b1b33;
+}
+
+@media (max-width: 900px) {
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar-actions {
+        justify-content: flex-start;
+    }
+
+    .panels {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        background: #1c1f22;
+        color: #e6e9ec;
+    }
+
+    .toolbar,
+    .panel,
+    button,
+    select,
+    input,
+    textarea {
+        background: #272b2f;
+        color: #e6e9ec;
+    }
+
+    .toolbar,
+    .panel,
+    .panel-header,
+    fieldset,
+    .array-item,
+    button,
+    select,
+    input,
+    textarea,
+    .preview {
+        border-color: #50575f;
+    }
+
+    .array-item,
+    .preview {
+        background: #202428;
+    }
+
+    .muted,
+    .help,
+    .loading {
+        color: #b0b7bf;
+    }
+
+    a {
+        color: #79bfff;
+    }
+}

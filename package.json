@@ -12,10 +12,14 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "editor": "bun server.js",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "acorn": "^8.15.0"
   },
   "devDependencies": {
     "@iconify-json/fa6-brands": "^1.2.6",

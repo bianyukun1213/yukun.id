@@ -46,7 +46,9 @@ jspm_packages/
 web_modules/
 
 # TypeScript cache
-*.tsbuildinfo
+# Local content editor backups
+res/.content-backups/
+res/.content.*.tmp
 
 # Optional npm cache directory
 .npm
