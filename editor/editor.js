@@ -10,10 +10,9 @@ const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url)).replace('/editor',
 const CONTENT_PATH = path.join(ROOT_DIR, 'res', 'content.js');
 const BACKUP_DIR = path.join(ROOT_DIR, 'editor', '.content-backups');
 const HOST = '127.0.0.1';
-const PORT = Number.parseInt(process.env.PORT || '41730', 10);
+const PORT = Number.parseInt(process.env.PORT || '40010', 10);
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const MAX_BACKUPS = 20;
-const TOKEN = crypto.randomBytes(32).toString('base64url');
 const LANGUAGE_KEYS = ['zh-CN', 'en-US', 'ru-RU'];
 const LOCALE_FIELDS = [
     'langName',
@@ -328,9 +327,7 @@ function readRequestBody(request) {
 function sendJson(response, statusCode, data) {
     response.writeHead(statusCode, {
         'Cache-Control': 'no-store',
-        'Content-Type': 'application/json; charset=utf-8',
-        'Referrer-Policy': 'no-referrer',
-        'X-Content-Type-Options': 'nosniff'
+        'Content-Type': 'application/json; charset=utf-8'
     });
     response.end(JSON.stringify(data));
 }
@@ -339,23 +336,7 @@ function sendError(response, statusCode, message, extra = createObject()) {
     sendJson(response, statusCode, { error: message, ...extra });
 }
 
-function isAuthorized(request, url) {
-    const authorization = request.headers.authorization;
-    const expected = `Bearer ${TOKEN}`;
-    return authorization === expected && url.searchParams.get('token') === null;
-}
-
-function isTrustedRequest(request) {
-    const host = request.headers.host;
-    if (host !== `${HOST}:${PORT}` && host !== HOST) return false;
-    const origin = request.headers.origin;
-    return !origin || origin === `http://${HOST}:${PORT}`;
-}
-
 async function handleApi(request, response, url) {
-    if (!isTrustedRequest(request)) return sendError(response, 403, '请求来源不受信任。');
-    if (!isAuthorized(request, url)) return sendError(response, 401, '需要本地编辑器令牌。');
-
     if (request.method === 'GET' && url.pathname === '/api/content') {
         try {
             const { content, revision } = await loadContent();
@@ -402,10 +383,7 @@ async function serveStatic(response, url) {
         const isEditorFile = filePath === path.join(ROOT_DIR, 'editor', 'index.html') || filePath === path.join(ROOT_DIR, 'editor', 'index.js') || filePath === path.join(ROOT_DIR, 'editor', 'index.css');
         response.writeHead(200, {
             'Cache-Control': isEditorFile ? 'no-store' : 'public, max-age=300',
-            'Content-Security-Policy': isEditorFile ? "default-src 'self'; connect-src 'self'; img-src 'self' https: http:; style-src 'self'; script-src 'self'; base-uri 'none'; frame-src 'none'; object-src 'none'" : "default-src 'self' https:; base-uri 'self'",
-            'Content-Type': MIME_TYPES[extension] || 'application/octet-stream',
-            'Referrer-Policy': 'no-referrer',
-            'X-Content-Type-Options': 'nosniff'
+            'Content-Type': MIME_TYPES[extension] || 'application/octet-stream'
         });
         fs.createReadStream(filePath).pipe(response);
     } catch (error) {
@@ -415,7 +393,7 @@ async function serveStatic(response, url) {
 }
 
 function sendPlain(response, statusCode, message) {
-    response.writeHead(statusCode, { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff' });
+    response.writeHead(statusCode, { 'Content-Type': 'text/plain; charset=utf-8' });
     response.end(message);
 }
 
@@ -428,7 +406,7 @@ const server = http.createServer(async (request, response) => {
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     server.listen(PORT, HOST, () => {
-        console.log(`内容编辑器已启动： http://${HOST}:${PORT}/editor/#token=${TOKEN}`);
+        console.log(`内容编辑器已启动： http://${HOST}:${PORT}/editor/`);
         console.log('该地址仅绑定到本机。按 Ctrl+C 停止服务。');
     });
 }

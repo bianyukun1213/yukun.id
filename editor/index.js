@@ -23,14 +23,6 @@ const panelsElement = document.getElementById('panels');
 const statusElement = document.getElementById('status');
 const saveButton = document.getElementById('save-button');
 const reloadButton = document.getElementById('reload-button');
-const apiToken = new URLSearchParams(location.hash.slice(1)).get('token');
-
-function apiHeaders(json = false) {
-    const headers = { Authorization: `Bearer ${apiToken || ''}` };
-    if (json) headers['Content-Type'] = 'application/json';
-    return headers;
-}
-
 function setStatus(message, kind = '') {
     statusElement.textContent = message;
     statusElement.className = `status ${kind}`;
@@ -231,7 +223,7 @@ function render() {
 
 async function loadContent() {
     setStatus('正在读取 content.js……');
-    const response = await fetch('/api/content', { headers: apiHeaders() });
+    const response = await fetch('/api/content');
     const body = await response.json();
     if (!response.ok) throw new Error(body.error || '读取失败。');
     state.content = body.content;
@@ -249,7 +241,7 @@ async function saveContent() {
     try {
         const response = await fetch('/api/content', {
             method: 'POST',
-            headers: apiHeaders(true),
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content: state.content, expectedRevision: state.revision })
         });
         const body = await response.json();
