@@ -192,7 +192,7 @@ function getCurrentLang() {
         }
     }
     if (!currentLang)
-        currentLang = 'en';
+        currentLang = 'en-US';
     return currentLang;
 }
 
