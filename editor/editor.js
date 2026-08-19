@@ -276,7 +276,7 @@ async function createBackup(source) {
         .filter(entry => entry.isFile() && /^content\..+\.js$/.test(entry.name))
         .sort((a, b) => a.name.localeCompare(b.name));
     await Promise.all(backups.slice(0, Math.max(0, backups.length - MAX_BACKUPS)).map(entry => fsp.unlink(path.join(BACKUP_DIR, entry.name))));
-    return path.posix.join('res/.content-backups', backupName);
+    return path.posix.join('editor/.content-backups', backupName);
 }
 
 async function replaceContent(output, originalSource) {
