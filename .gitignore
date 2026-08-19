@@ -46,9 +46,7 @@ jspm_packages/
 web_modules/
 
 # TypeScript cache
-# Local content editor backups
-res/.content-backups/
-res/.content.*.tmp
+*.tsbuildinfo
 
 # Optional npm cache directory
 .npm
@@ -136,3 +134,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Local content editor backups
+editor/.content-backups/
+editor/.content.*.tmp

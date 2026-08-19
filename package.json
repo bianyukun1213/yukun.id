@@ -14,19 +14,13 @@
   "author": "",
   "type": "module",
   "main": "main.js",
-  "scripts": {
-    "editor": "bun server.js",
-    "test": "bun test"
-  },
-  "dependencies": {
-    "acorn": "^8.15.0"
-  },
   "devDependencies": {
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/simple-icons": "^1.2.89",
     "@iconify-json/uil": "^1.2.3",
     "@unocss/postcss": "^66.7.5",
     "@unocss/preset-icons": "^66.7.5",
+    "acorn": "^8.18.0",
     "postcss": "^8.5.16",
     "postcss-cli": "^11.0.1",
     "unocss": "^66.7.5"

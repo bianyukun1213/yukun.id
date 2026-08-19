@@ -185,7 +185,8 @@ function renderArray(parent, path, key, value) {
         markDirty();
         render();
     });
-    fieldset.append(makeElement('div', undefined, 'array-actions')).append(add);
+    fieldset.append(makeElement('div', undefined, 'array-actions'));
+    fieldset.append(add);
     parent.append(fieldset);
 }
 
@@ -288,7 +289,9 @@ window.addEventListener('beforeunload', (event) => {
     event.returnValue = '';
 });
 
-loadContent().catch(error => {
-    panelsElement.setAttribute('aria-busy', 'false');
-    setStatus(error.message, 'error');
-});
+loadContent()
+
+// .catch(error => {
+//     panelsElement.setAttribute('aria-busy', 'false');
+//     setStatus(error.message, 'error');
+// });

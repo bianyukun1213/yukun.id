@@ -6,11 +6,11 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parse } from 'acorn';
 
-const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const ROOT_DIR = path.dirname(fileURLToPath(import.meta.url)).replace('/editor','').replace('\\editor','');
 const CONTENT_PATH = path.join(ROOT_DIR, 'res', 'content.js');
-const BACKUP_DIR = path.join(ROOT_DIR, 'res', '.content-backups');
+const BACKUP_DIR = path.join(ROOT_DIR, 'editor', '.content-backups');
 const HOST = '127.0.0.1';
-const PORT = Number.parseInt(process.env.PORT || '4173', 10);
+const PORT = Number.parseInt(process.env.PORT || '41730', 10);
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 const MAX_BACKUPS = 20;
 const TOKEN = crypto.randomBytes(32).toString('base64url');
@@ -393,13 +393,13 @@ function resolveStaticPath(urlPath) {
 }
 
 async function serveStatic(response, url) {
-    const filePath = resolveStaticPath(url.pathname === '/editor/' ? '/editor.html' : url.pathname);
+    const filePath = resolveStaticPath(url.pathname === '/editor/' ? '/editor/index.html' : url.pathname);
     if (!filePath) return sendPlain(response, 403, 'Forbidden');
     try {
         const stats = await fsp.stat(filePath);
         if (!stats.isFile()) return sendPlain(response, 404, 'Not Found');
         const extension = path.extname(filePath).toLowerCase();
-        const isEditorFile = filePath === path.join(ROOT_DIR, 'editor.html') || filePath === path.join(ROOT_DIR, 'res', 'editor.js') || filePath === path.join(ROOT_DIR, 'res', 'editor.css');
+        const isEditorFile = filePath === path.join(ROOT_DIR, 'editor', 'index.html') || filePath === path.join(ROOT_DIR, 'editor', 'index.js') || filePath === path.join(ROOT_DIR, 'editor', 'index.css');
         response.writeHead(200, {
             'Cache-Control': isEditorFile ? 'no-store' : 'public, max-age=300',
             'Content-Security-Policy': isEditorFile ? "default-src 'self'; connect-src 'self'; img-src 'self' https: http:; style-src 'self'; script-src 'self'; base-uri 'none'; frame-src 'none'; object-src 'none'" : "default-src 'self' https:; base-uri 'self'",
