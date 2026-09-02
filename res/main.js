@@ -45,6 +45,22 @@ function setGetMoreContact(langKey) {
                 captchaLoading = true;
                 captchaStatus.textContent = content[langKey].captchaLoading;
                 captchaStatus.removeAttribute('style');
+                // let captchaOnLoadBound = false;
+                // const checkCaptchaLoaded = () => {
+                //     const captchaIframe = captchaContainer.querySelector('iframe');
+                //     if (captchaIframe && !captchaOnLoadBound) {
+                //         captchaIframe.onload = function () {
+                //             captchaStatus.textContent = '';
+                //             captchaStatus.style.display = 'none';
+                //             captchaLoading = false;
+                //             captchaLoaded = true;
+                //             clearInterval(checkCaptchaLoaded);
+                //         }
+                //         captchaOnLoadBound = true;
+                //     }
+                // };
+                // checkCaptchaLoaded();
+                // setInterval(checkCaptchaLoaded, 100);
                 const widgetId = hcaptcha.render(captchaContainer, {
                     sitekey,
                     hl: langKey,
@@ -56,20 +72,11 @@ function setGetMoreContact(langKey) {
                         fetchMoreContact(token);
                     }
                 });
-                let captchaOnLoadBound = false;
-                const checkCaptchaLoaded = setInterval(() => {
-                    const captchaIframe = captchaContainer.querySelector('iframe');
-                    if (captchaIframe && !captchaOnLoadBound) {
-                        captchaIframe.onload = function () {
-                            captchaStatus.textContent = '';
-                            captchaStatus.style.display = 'none';
-                            captchaLoading = false;
-                            captchaLoaded = true;
-                            clearInterval(checkCaptchaLoaded);
-                        }
-                        captchaOnLoadBound = true;
-                    }
-                }, 100);
+                // 直接从 res 引入验证码后加载很快，没有好的办法检测何时加载完成。于是这里直接认为加载完成。
+                captchaStatus.textContent = '';
+                captchaStatus.style.display = 'none';
+                captchaLoading = false;
+                captchaLoaded = true;
             } catch (e) {
                 console.error('hCaptcha render failed:', e);
                 captchaStatus.textContent = content[langKey].captchaLoadingFailed;
