@@ -135,6 +135,12 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
+
 # Local content editor backups
 editor/.content-backups/
 editor/.content.*.tmp
