@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "yukun.bio",
+      "name": "yukun.id",
       "devDependencies": {
         "@iconify-json/fa6-brands": "^1.2.6",
         "@iconify-json/simple-icons": "^1.2.89",

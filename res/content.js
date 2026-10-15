@@ -5,13 +5,13 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
                 "width": 1080,
                 "height": 1440,
                 "alt": "一位戴着皮帽，穿着带有民族特色图案的传统服饰的年轻男子，站在帐篷旁。"
             },
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_graduation.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
                 "height": 1441,
                 "alt": "一位穿着黑色学士服和戴着学士帽的年轻人，站在户外的楼梯旁，背景是建筑物和绿色植物。"
@@ -86,13 +86,13 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
                 "width": 1080,
                 "height": 1440,
                 "alt": "A young man wearing a fur hat and traditional clothing with ethnic patterns stands next to the tent."
             },
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_graduation.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
                 "height": 1441,
                 "alt": "A young man in a black graduation gown and hat stands by the stairs outdoors, with buildings and green plants in the background."
@@ -167,13 +167,13 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
                 "width": 1080,
                 "height": 1440,
                 "alt": "Рядом с палаткой стоит молодой человек в меховой шапке и традиционной одежде с этническими узорами."
             },
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.bio/profiles/profile_graduation.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
                 "height": 1441,
                 "alt": "Молодой человек в черной мантии и шляпе бакалавра стоит рядом с наружной лестницей на фоне зданий и зелени."

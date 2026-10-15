@@ -1,14 +1,14 @@
 {
-  "name": "yukun.bio",
+  "name": "yukun.id",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/bianyukun1213/yukun.bio#readme",
+  "homepage": "https://github.com/bianyukun1213/yukun.id#readme",
   "bugs": {
-    "url": "https://github.com/bianyukun1213/yukun.bio/issues"
+    "url": "https://github.com/bianyukun1213/yukun.id/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bianyukun1213/yukun.bio.git"
+    "url": "git+https://github.com/bianyukun1213/yukun.id.git"
   },
   "license": "ISC",
   "author": "",

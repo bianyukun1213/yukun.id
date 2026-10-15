@@ -15,7 +15,7 @@ function setGetMoreContact(langKey) {
     const captchaStatus = document.getElementById('captcha-status');
     const moreContactContainer = document.getElementById('more-contact-container');
     const fetchMoreContact = function (token) {
-        fetch('https://service.yukun.bio/get-more-contact', {
+        fetch('https://service.yukun.id/get-more-contact', {
             method: 'POST',
             body: JSON.stringify({ hCaptchaToken: token, source: typeof source !== 'undefined' ? source : undefined })
         }).then(async function (response) {
@@ -239,7 +239,7 @@ function generateOpenGraph(langKey, langContent) {
     let ogTemplate = `
     <meta property="og:type" content="website">
     <meta property="og:title" content="${langContent.name}">
-    <meta property="og:url" content="https://yukun.bio/">
+    <meta property="og:url" content="https://yukun.id/">
     <meta property="og:site_name" content="${langContent.name}">
     <meta property="og:description" content="${langContent.desc}">
     <meta property="og:locale" content="${langKey}">
@@ -261,13 +261,13 @@ function generateJsonLd(langKey, langContent) {
         "name": "${langContent.name}",
         "description": "${langContent.desc}",
         "keywords": "${langContent.keywords}",
-        "url": "https://yukun.bio/",
+        "url": "https://yukun.id/",
         "mainEntity": {
           "@type": "Person",
           "name": "${langContent.name}",
           "description": "${langContent.desc}",
           "image": "${langContent.profiles[0].src}",
-          "url": "https://yukun.bio/",
+          "url": "https://yukun.id/",
           "sameAs": ${linksArrayString}
         }
       }
