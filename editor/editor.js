@@ -25,6 +25,7 @@ const LOCALE_FIELDS = [
     'aka',
     'desc',
     'keywords',
+    'tags',
     'mirrorNotice',
     'markdown',
     'captchaLoading',
@@ -149,10 +150,16 @@ function validateLocale(locale, languageKey, errors) {
     assertKeys(locale, LOCALE_FIELDS, base, errors);
 
     for (const key of LOCALE_FIELDS) {
-        if (['profiles', 'links', 'photoSwipe', 'colorScheme'].includes(key)) continue;
+        if (['profiles', 'links', 'tags', 'photoSwipe', 'colorScheme'].includes(key)) continue;
         assertString(locale[key], `${base}.${key}`, errors, key === 'markdown' ? 500_000 : 20_000);
     }
     if (locale.dir !== 'ltr' && locale.dir !== 'rtl') errors.push(`${base}.dir 必须是 ltr 或 rtl。`);
+
+    if (!Array.isArray(locale.tags) || locale.tags.length > 50) {
+        errors.push(`${base}.tags 必须是不超过 50 项的数组。`);
+    } else {
+        locale.tags.forEach((tag, index) => assertString(tag, `${base}.tags[${index}]`, errors, 200));
+    }
 
     if (!Array.isArray(locale.profiles) || locale.profiles.length === 0 || locale.profiles.length > 20) {
         errors.push(`${base}.profiles 必须包含 1 到 20 项。`);

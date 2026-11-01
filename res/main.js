@@ -275,6 +275,20 @@ function generateJsonLd(langKey, langContent) {
     return jsonLdTemplate;
 }
 
+function renderTags(tags) {
+    const container = document.getElementById('tags-container');
+    if (!container) return;
+    container.replaceChildren();
+    const tagList = Array.isArray(tags) ? tags.filter(tag => typeof tag === 'string' && tag.trim() !== '') : [];
+    container.hidden = tagList.length === 0;
+    for (const tag of tagList) {
+        const tagElement = document.createElement('span');
+        tagElement.className = 'tag';
+        tagElement.textContent = tag.trim();
+        container.append(tagElement);
+    }
+}
+
 function updateInterface(langKey) {
     const langContent = content[langKey];
     document.documentElement.setAttribute('lang', langKey);
@@ -322,6 +336,7 @@ function updateInterface(langKey) {
     /** render markdown */
     const markdownContent = langContent.markdown;
     document.getElementById('rendered-content').innerHTML = marked.parse(markdownContent);
+    renderTags(langContent.tags);
     const imgs = [...document.getElementsByTagName('img')];
     imgs.forEach(function (img) {
         img.className += ' img-loading';

@@ -320,6 +320,28 @@ details {
     @apply un-inline-block;
 }
 
+#tags-container {
+    @apply un-flex;
+    @apply un-flex-wrap;
+    @apply un-gap-2;
+    @apply un-my-4;
+}
+
+#tags-container[hidden] {
+    @apply un-hidden;
+}
+
+#tags-container .tag {
+    @apply un-inline-flex;
+    @apply un-items-center;
+    /* @apply un-text-sm; */
+    @apply un-text-txt-scnd;
+}
+
+#tags-container .tag::before {
+    content: '#';
+}
+
 #get-more-contact {
     @apply un-text-lk;
     @apply un-underline;

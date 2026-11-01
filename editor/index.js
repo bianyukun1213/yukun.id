@@ -4,7 +4,7 @@ const LANGUAGE_KEYS = ['zh-CN', 'en-US', 'ru-RU'];
 const labels = {
     langName: '语言短名称', langLabel: '语言选择器标签', dir: '文字方向', profiles: '个人照片',
     profileImgCounterTitle: '照片计数标题', links: '链接', name: '姓名', aka: '别名', desc: '简介',
-    keywords: '关键词', mirrorNotice: '镜像提示', markdown: 'Markdown', captchaLoading: '验证码加载中',
+    keywords: '关键词', tags: '标签', mirrorNotice: '镜像提示', markdown: 'Markdown', captchaLoading: '验证码加载中',
     captchaLoadingFailed: '验证码加载失败', moreContactLoading: '更多联系方式加载中',
     moreContactLoadingFailed: '更多联系方式加载失败', photoSwipe: '图片查看器', colorScheme: '颜色主题',
     src: '图片地址', width: '宽度', height: '高度', alt: '替代文本', title: '标题', icon: '图标', href: '网址',
@@ -182,7 +182,23 @@ function renderArray(parent, path, key, value) {
     parent.append(fieldset);
 }
 
+function renderStringList(parent, path, key, value) {
+    const wrapper = makeElement('div', undefined, 'field');
+    const label = makeElement('label', displayName(key));
+    const control = makeElement('textarea');
+    control.id = `field-${path.join('-')}`;
+    control.name = path.join('.');
+    control.value = value.join('\n');
+    label.htmlFor = control.id;
+    control.addEventListener('input', () => {
+        setPathValue(path, control.value.split('\n').map(item => item.trim()).filter(item => item !== ''));
+    });
+    wrapper.append(label, control, makeElement('p', '每行一个，井号由网站自动添加。', 'muted'));
+    parent.append(wrapper);
+}
+
 function renderValue(parent, path, key, value) {
+    if (Array.isArray(value) && value.every(item => typeof item === 'string')) return renderStringList(parent, path, key, value);
     if (Array.isArray(value)) return renderArray(parent, path, key, value);
     if (value && typeof value === 'object') return renderObject(parent, path, key, value);
     renderScalar(parent, path, key, value);

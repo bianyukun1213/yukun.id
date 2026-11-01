@@ -361,6 +361,20 @@ iframe {display:block;max-width:100%;margin-block:calc(var(--spacing) * 4);margi
 details {display:inline-block;
 }
 
+#tags-container {display:flex;flex-wrap:wrap;gap:calc(var(--spacing) * 2);margin-block:calc(var(--spacing) * 4);
+}
+
+#tags-container[hidden] {display:none;
+}
+
+#tags-container .tag {display:inline-flex;align-items:center;
+    /* @apply un-text-sm; */syntax:"<percentage>";inherits:false;initial-value:100%;color:color-mix(in srgb, var(--tide-color-text-secondary) var(--un-text-opacity), transparent);
+}
+
+#tags-container .tag::before {
+    content: '#';
+}
+
 #get-more-contact {syntax:"<percentage>";inherits:false;initial-value:100%;color:color-mix(in srgb, var(--tide-color-link) var(--un-text-opacity), transparent);text-decoration-line:underline;syntax:"<percentage>";inherits:false;initial-value:100%;
 }
 
