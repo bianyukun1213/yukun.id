@@ -217,8 +217,17 @@ p {
     @apply un-indent-[2em];
 }
 
-:root[lang="zh-CN"] #rendered-content blockquote p {
+:root[lang="zh-CN"] #rendered-content blockquote p,
+:root[lang="zh-CN"] #rendered-content li p {
     @apply un-indent-unset;
+}
+
+#rendered-content p:has(.li-description) {
+    @apply un-indent-[2em]!;
+}
+
+.li-description {
+    @apply un-text-txt-scnd;
 }
 
 a:not(.icon) {

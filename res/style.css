@@ -293,7 +293,14 @@ p {margin-block:calc(var(--spacing) * 4);
 :root[lang="zh-CN"] #rendered-content p {text-indent:2em;
 }
 
-:root[lang="zh-CN"] #rendered-content blockquote p {text-indent:unset;
+:root[lang="zh-CN"] #rendered-content blockquote p,
+:root[lang="zh-CN"] #rendered-content li p {text-indent:unset;
+}
+
+#rendered-content p:has(.li-description) {text-indent:2em !important;
+}
+
+.li-description {syntax:"<percentage>";inherits:false;initial-value:100%;color:color-mix(in srgb, var(--tide-color-text-secondary) var(--un-text-opacity), transparent);
 }
 
 a:not(.icon) {syntax:"<percentage>";inherits:false;initial-value:100%;color:color-mix(in srgb, var(--tide-color-link) var(--un-text-opacity), transparent);text-decoration-line:underline;syntax:"<percentage>";inherits:false;initial-value:100%;syntax:"<percentage>";inherits:false;initial-value:100%;
