@@ -289,6 +289,129 @@ function renderTags(tags) {
     }
 }
 
+const blurHashAlphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~';
+const blurHashDataUrlCache = new Map();
+
+function decodeBlurHashBase83(value) {
+    let result = 0;
+    for (const character of value) {
+        const index = blurHashAlphabet.indexOf(character);
+        if (index === -1) throw new Error(`Invalid BlurHash character: ${character}.`);
+        result = result * 83 + index;
+    }
+    return result;
+}
+
+function blurHashSrgbToLinear(value) {
+    const normalized = value / 255;
+    return normalized <= 0.04045 ? normalized / 12.92 : Math.pow((normalized + 0.055) / 1.055, 2.4);
+}
+
+function blurHashLinearToSrgb(value) {
+    const normalized = Math.max(0, Math.min(1, value));
+    return normalized <= 0.0031308 ? normalized * 12.92 : 1.055 * Math.pow(normalized, 1 / 2.4) - 0.055;
+}
+
+function blurHashSignPow(value, exponent) {
+    return Math.sign(value) * Math.pow(Math.abs(value), exponent);
+}
+
+function decodeBlurHashDC(value) {
+    return [blurHashSrgbToLinear(value >> 16), blurHashSrgbToLinear((value >> 8) & 255), blurHashSrgbToLinear(value & 255)];
+}
+
+function decodeBlurHashAC(value, maximumValue) {
+    return [
+        blurHashSignPow((Math.floor(value / 361) - 9) / 9, 2) * maximumValue,
+        blurHashSignPow((Math.floor(value / 19) % 19 - 9) / 9, 2) * maximumValue,
+        blurHashSignPow((value % 19 - 9) / 9, 2) * maximumValue
+    ];
+}
+
+// 参考 https://github.com/woltapp/blurhash 的解码实现。
+function decodeBlurHashToDataUrl(hash, aspectRatio) {
+    const normalized = hash.replace(/\s/g, '');
+    if (normalized.length < 6) throw new Error('BlurHash is too short.');
+    const sizeFlag = decodeBlurHashBase83(normalized[0]);
+    const componentCountY = Math.floor(sizeFlag / 9) + 1;
+    const componentCountX = (sizeFlag % 9) + 1;
+    if (normalized.length !== 4 + 2 * componentCountX * componentCountY) throw new Error('BlurHash length mismatch.');
+    const maximumValue = (decodeBlurHashBase83(normalized[1]) + 1) / 166;
+    const colors = new Array(componentCountX * componentCountY);
+    colors[0] = decodeBlurHashDC(decodeBlurHashBase83(normalized.substring(2, 6)));
+    for (let i = 1; i < colors.length; i++) {
+        colors[i] = decodeBlurHashAC(decodeBlurHashBase83(normalized.substring(4 + i * 2, 6 + i * 2)), maximumValue);
+    }
+    const width = 32;
+    const height = Math.max(1, Math.round(width / aspectRatio));
+    const pixels = new Uint8ClampedArray(width * height * 4);
+    let index = 0;
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            let r = 0;
+            let g = 0;
+            let b = 0;
+            for (let componentY = 0; componentY < componentCountY; componentY++) {
+                for (let componentX = 0; componentX < componentCountX; componentX++) {
+                    const basis = Math.cos(Math.PI * x * componentX / width) * Math.cos(Math.PI * y * componentY / height);
+                    const color = colors[componentX + componentY * componentCountX];
+                    r += color[0] * basis;
+                    g += color[1] * basis;
+                    b += color[2] * basis;
+                }
+            }
+            pixels[index++] = Math.round(blurHashLinearToSrgb(r) * 255);
+            pixels[index++] = Math.round(blurHashLinearToSrgb(g) * 255);
+            pixels[index++] = Math.round(blurHashLinearToSrgb(b) * 255);
+            pixels[index++] = 255;
+        }
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').putImageData(new ImageData(pixels, width, height), 0, 0);
+    return canvas.toDataURL('image/png');
+}
+
+function getBlurHashDataUrl(hash, aspectRatio) {
+    const cacheKey = `${hash.replace(/\s/g, '')}@${aspectRatio.toFixed(4)}`;
+    if (!blurHashDataUrlCache.has(cacheKey)) {
+        blurHashDataUrlCache.set(cacheKey, decodeBlurHashToDataUrl(hash, aspectRatio));
+    }
+    return blurHashDataUrlCache.get(cacheKey);
+}
+
+function renderProfileStack(profiles) {
+    const stack = document.getElementById('profile-stack');
+    if (!stack) return;
+    stack.replaceChildren();
+    const backProfiles = profiles.slice(1, 3);
+    backProfiles.forEach(function (profile, index) {
+        const card = document.createElement('div');
+        card.className = 'profile-stack-card';
+        card.dataset.depth = String(index + 1);
+        card.setAttribute('aria-hidden', 'true');
+        const aspectRatio = profile.width > 0 && profile.height > 0 ? profile.width / profile.height : 3 / 4;
+        const hash = typeof profile.blurhash === 'string' ? profile.blurhash : '';
+        if (hash.trim() !== '') {
+            try {
+                card.style.backgroundImage = `url("${getBlurHashDataUrl(hash, aspectRatio)}")`;
+            } catch (error) {
+                console.warn('Unable to decode BlurHash:', error);
+            }
+        }
+        stack.append(card);
+    });
+    stack.hidden = backProfiles.length === 0;
+}
+
+function syncProfileStackVisibility() {
+    const stack = document.getElementById('profile-stack');
+    const profile = document.getElementById('profile');
+    if (!stack || !profile) return;
+    stack.hidden = stack.childElementCount === 0 || !profile.complete || profile.naturalWidth === 0;
+}
+
 function updateInterface(langKey) {
     const langContent = content[langKey];
     document.documentElement.setAttribute('lang', langKey);
@@ -337,6 +460,7 @@ function updateInterface(langKey) {
     const markdownContent = langContent.markdown;
     document.getElementById('rendered-content').innerHTML = marked.parse(markdownContent);
     renderTags(langContent.tags);
+    renderProfileStack(langContent.profiles);
     const imgs = [...document.getElementsByTagName('img')];
     imgs.forEach(function (img) {
         img.className += ' img-loading';
@@ -345,11 +469,17 @@ function updateInterface(langKey) {
         let loadedImg = e.target;
         loadedImg.className = loadedImg.className.replace(' img-loading', '');
         loadedImg.style.aspectRatio = null;
+        if (loadedImg.id === 'profile') {
+            syncProfileStackVisibility();
+        }
     };
     showImgError = function (e) {
         let loadedImg = e.target;
         loadedImg.removeAttribute('tabindex');
         loadedImg.className = loadedImg.className.replace(' img-loading', '') + ' img-error';
+        if (loadedImg.id === 'profile') {
+            syncProfileStackVisibility();
+        }
     };
     const profile = document.getElementById('profile');
     if (hideImgLoading) profile.removeEventListener('load', hideImgLoading);
@@ -361,6 +491,7 @@ function updateInterface(langKey) {
     profile.style.aspectRatio = langContent.profiles[0].width / langContent.profiles[0].height;
     profile.setAttribute('src', langContent.profiles[0].src);
     profile.setAttribute('alt', langContent.profiles[0].alt);
+    syncProfileStackVisibility();
     if (initPswp) {
         profile.removeEventListener('click', initPswp);
         profile.removeEventListener('keydown', initPswp);

@@ -35,7 +35,7 @@ const LOCALE_FIELDS = [
     'photoSwipe',
     'colorScheme'
 ];
-const PROFILE_FIELDS = ['src', 'width', 'height', 'alt'];
+const PROFILE_FIELDS = ['src', 'width', 'height', 'alt', 'blurhash'];
 const LINK_FIELDS = ['title', 'icon', 'href'];
 const PHOTO_SWIPE_FIELDS = ['closeTitle', 'zoomTitle', 'arrowPrevTitle', 'arrowNextTitle', 'errorMsg', 'indexIndicatorSep'];
 const COLOR_SCHEME_FIELDS = ['label', 'light', 'dark', 'system'];
@@ -178,6 +178,7 @@ function validateLocale(locale, languageKey, errors) {
                 }
             }
             assertString(profile.alt, `${profilePath}.alt`, errors);
+            assertString(profile.blurhash, `${profilePath}.blurhash`, errors, 200);
         });
     }
 

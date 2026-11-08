@@ -7,7 +7,7 @@ const labels = {
     keywords: '关键词', tags: '标签', mirrorNotice: '镜像提示', markdown: 'Markdown', captchaLoading: '验证码加载中',
     captchaLoadingFailed: '验证码加载失败', moreContactLoading: '更多联系方式加载中',
     moreContactLoadingFailed: '更多联系方式加载失败', photoSwipe: '图片查看器', colorScheme: '颜色主题',
-    src: '图片地址', width: '宽度', height: '高度', alt: '替代文本', title: '标题', icon: '图标', href: '网址',
+    src: '图片地址', width: '宽度', height: '高度', alt: '替代文本', blurhash: '方框模糊色（BlurHash）', title: '标题', icon: '图标', href: '网址',
     closeTitle: '关闭按钮标题', zoomTitle: '缩放按钮标题', arrowPrevTitle: '上一张按钮标题',
     arrowNextTitle: '下一张按钮标题', errorMsg: '错误消息', indexIndicatorSep: '索引分隔符',
     label: '标签', light: '浅色', dark: '深色', system: '系统'
@@ -172,7 +172,7 @@ function renderArray(parent, path, key, value) {
     const add = makeElement('button', '新增');
     add.type = 'button';
     add.addEventListener('click', () => {
-        const template = key === 'profiles' ? { src: 'https://', width: 1, height: 1, alt: '' } : { title: '', icon: 'uil:globe', href: 'https://' };
+        const template = key === 'profiles' ? { src: 'https://', width: 1, height: 1, alt: '', blurhash: '' } : { title: '', icon: 'uil:globe', href: 'https://' };
         value.push(template);
         markDirty();
         render();

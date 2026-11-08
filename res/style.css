@@ -59,6 +59,7 @@
 [dir="ltr"] .ltr\:-un-translate-x-1\/2{--un-translate-x:-50%;translate:var(--un-translate-x) var(--un-translate-y);}
 [dir="rtl"] .rtl\:un-translate-x-1\/2{--un-translate-x:50%;translate:var(--un-translate-x) var(--un-translate-y);}
 .un-items-center{align-items:center;}
+.un-inset-0{inset:calc(var(--spacing) * 0);}
 .un-end-0{inset-inline-end:calc(var(--spacing) * 0);}
 .un-start-1\/2{inset-inline-start:50%;}
 .un-bottom-0{bottom:calc(var(--spacing) * 0);}
@@ -332,6 +333,40 @@ p img {display:block;width:80%;
 #rendered-content img[data-width][data-height] {cursor:zoom-in;
 }
 
+#profile-wrapper {
+    isolation: isolate;
+}
+
+/* 给图片堆叠的上侧留出不被 #profile-links-content 的 overflow 裁掉的空间。 */
+#profile-links-content {
+    --profile-stack-overflow-space: max(2.5rem, 8%);
+    padding-top: var(--profile-stack-overflow-space);
+    margin-top: calc(-1 * var(--profile-stack-overflow-space));
+}
+
+#profile-stack[hidden] {display:none;
+}
+
+.profile-stack-card {syntax:"<percentage>";inherits:false;initial-value:100%;background-color:color-mix(in srgb, var(--tide-color-background-secondary) var(--un-bg-opacity), transparent);inset:calc(var(--spacing) * 0);position:absolute;background-size:cover;background-position:center;background-repeat:no-repeat;
+    /* border: 1px solid color-mix(in srgb, var(--tide-color-text-primary) 40%, transparent);
+    border-radius: 0.5rem; */
+    transform-origin: center;
+}
+
+.profile-stack-card[data-depth="1"] {z-index:1;
+    transform: translate(6%, -3.2%) rotate(4deg) scale(0.96);
+}
+
+.profile-stack-card[data-depth="2"] {z-index:0;
+    transform: translate(12.5%, -7%) rotate(8deg) scale(0.92);
+}
+
+#profile {position:relative;z-index:2;
+}
+
+#profile-img-counter {z-index:3;
+}
+
 blockquote {padding-block:calc(var(--spacing) * 2);padding-inline:calc(var(--spacing) * 4);margin-block:calc(var(--spacing) * 4);margin-inline:calc(var(--spacing) * 0);font-style:italic;syntax:"<percentage>";inherits:false;initial-value:100%;background-color:color-mix(in srgb, var(--tide-color-background-secondary) var(--un-bg-opacity), transparent);syntax:"<percentage>";inherits:false;initial-value:100%;border-inline-start-width:4px;border-inline-start-color:color-mix(in srgb, var(--tide-color-primary) var(--un-border-inline-start-opacity), transparent);--un-border-inline-start-opacity:var(--un-border-opacity);--un-border-style:solid;border-inline-start-style:solid;syntax:"*";inherits:false;initial-value:solid;outline-style:var(--un-outline-style);outline-width:1px;outline-color:transparent;--un-outline-style:solid;outline-style:solid;
 }
 
@@ -529,5 +564,8 @@ summary {cursor:pointer;
     }
 
     #utils {display:none;
+    }
+
+    #profile-stack {display:none;
     }
 }

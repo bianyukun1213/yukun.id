@@ -5,16 +5,46 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_armoll.webp",
                 "width": 1080,
                 "height": 1440,
-                "alt": "一位戴着皮帽，穿着带有民族特色图案的传统服饰的年轻男子，站在帐篷旁。"
+                "alt": "一位戴着皮帽，穿着带有民族特色图案的传统服饰的年轻男子，站在帐篷旁。",
+                "blurhash": "mXKn0UxY_M.7?bR*%Mt5NHazRjj]jEazs+f6ofa}RjWBxuj?WBt7"
             },
             {
                 "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
-                "height": 1441,
-                "alt": "一位穿着黑色学士服和戴着学士帽的年轻人，站在户外的楼梯旁，背景是建筑物和绿色植物。"
+                "height": 1440,
+                "alt": "一位穿着黑色学士服和戴着学士帽的年轻人，站在户外的楼梯旁，背景是建筑物和绿色植物。",
+                "blurhash": "mIGIib^-t6_2IC.6%MIV.6RVoyM{$,tjM}M|NGxbWAaeWBM{WEa_"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_vyborg.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "一位戴毛线帽和眼镜的年轻人在雪中举着椒盐卷饼，背景是维堡城堡。",
+                "blurhash": "mmLN*{xu-;M{~qM{IUoz%gxujst7ayj]t7jZRPayWBfPt7WBofWB"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka_boiler_room.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "一位戴眼镜、围着灰色围巾的年轻人在贴满海报、堆满唱片的“堪察加锅炉房”俱乐部。",
+                "blurhash": "mMC$in~UxFjF$%WANGWVE2RmW;W;M{RnRkWE-mxsoLaLxut5s:oI"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_unecon.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "一位穿黑色长款羽绒服的年轻人站在冬夜两尊金色翅膀的狮鹫雕像之间。",
+                "blurhash": "mIHT?F%1%Moz_MK5flkC}?xDNGjEkWRjjYWAOGj[%0s.NKofkCkC"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_bunker_703.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "一位年轻人在巨大的废弃混凝土圆拱隧道中张开双臂站立，脚下拖着长长的影子。",
+                "blurhash": "mGD+}Dof%gxu00WWIUV@?woexZfl-:bHx]axMxWBE1a#_2ofNGj@"
             }
         ],
         "profileImgCounterTitle": "相片数",
@@ -94,16 +124,46 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_armoll.webp",
                 "width": 1080,
                 "height": 1440,
-                "alt": "A young man wearing a fur hat and traditional clothing with ethnic patterns stands next to the tent."
+                "alt": "A young man wearing a fur hat and traditional clothing with ethnic patterns stands next to the tent.",
+                "blurhash": "mXKn0UxY_M.7?bR*%Mt5NHazRjj]jEazs+f6ofa}RjWBxuj?WBt7"
             },
             {
                 "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
-                "height": 1441,
-                "alt": "A young man in a black graduation gown and hat stands by the stairs outdoors, with buildings and green plants in the background."
+                "height": 1440,
+                "alt": "A young man in a black graduation gown and hat stands by the stairs outdoors, with buildings and green plants in the background.",
+                "blurhash": "mIGIib^-t6_2IC.6%MIV.6RVoyM{$,tjM}M|NGxbWAaeWBM{WEa_"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_vyborg.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "A young man in a knit hat and glasses holds a pretzel in the snow, with Vyborg Castle in the background.",
+                "blurhash": "mmLN*{xu-;M{~qM{IUoz%gxujst7ayj]t7jZRPayWBfPt7WBofWB"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka_boiler_room.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "A young man in glasses and a gray scarf in the “Kamchatka Boiler Room” club, where the walls are covered with posters and the shelves are packed with records.",
+                "blurhash": "mMC$in~UxFjF$%WANGWVE2RmW;W;M{RnRkWE-mxsoLaLxut5s:oI"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_unecon.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "A young man in a long black puffer coat stands between two golden-winged griffin statues on a winter night.",
+                "blurhash": "mIHT?F%1%Moz_MK5flkC}?xDNGjEkWRjjYWAOGj[%0s.NKofkCkC"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_bunker_703.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "A young man stands with his arms outstretched in a huge abandoned concrete tunnel, casting a long shadow.",
+                "blurhash": "mGD+}Dof%gxu00WWIUV@?woexZfl-:bHx]axMxWBE1a#_2ofNGj@"
             }
         ],
         "profileImgCounterTitle": "Photo count",
@@ -183,16 +243,46 @@ const content = {
         "dir": "ltr",
         "profiles": [
             {
-                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka.webp",
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_armoll.webp",
                 "width": 1080,
                 "height": 1440,
-                "alt": "Рядом с палаткой стоит молодой человек в меховой шапке и традиционной одежде с этническими узорами."
+                "alt": "Рядом с палаткой стоит молодой человек в меховой шапке и традиционной одежде с этническими узорами.",
+                "blurhash": "mXKn0UxY_M.7?bR*%Mt5NHazRjj]jEazs+f6ofa}RjWBxuj?WBt7"
             },
             {
                 "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_graduation.webp",
                 "width": 1080,
-                "height": 1441,
-                "alt": "Молодой человек в черной мантии и шляпе бакалавра стоит рядом с наружной лестницей на фоне зданий и зелени."
+                "height": 1440,
+                "alt": "Молодой человек в черной мантии и шляпе бакалавра стоит рядом с наружной лестницей на фоне зданий и зелени.",
+                "blurhash": "mIGIib^-t6_2IC.6%MIV.6RVoyM{$,tjM}M|NGxbWAaeWBM{WEa_"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_vyborg.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "Молодой человек в вязаной шапке и очках держит крендель на снегу, на заднем плане — Выборгский замок.",
+                "blurhash": "mmLN*{xu-;M{~qM{IUoz%gxujst7ayj]t7jZRPayWBfPt7WBofWB"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_kamchatka_boiler_room.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "Молодой человек в очках и сером шарфе в клубе «Котельная Камчатка», где стены увешаны плакатами, а полки заставлены пластинками.",
+                "blurhash": "mMC$in~UxFjF$%WANGWVE2RmW;W;M{RnRkWE-mxsoLaLxut5s:oI"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_unecon.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "Молодой человек в длинном чёрном пуховике стоит между двумя статуями крылатых грифонов зимней ночью.",
+                "blurhash": "mIHT?F%1%Moz_MK5flkC}?xDNGjEkWRjjYWAOGj[%0s.NKofkCkC"
+            },
+            {
+                "src": "https://bucket-eo.hollisdevhub.com/yukun.id/profiles/profile_bunker_703.webp",
+                "width": 1080,
+                "height": 1440,
+                "alt": "Молодой человек стоит с раскинутыми руками в огромном заброшенном бетонном туннеле, отбрасывая длинную тень.",
+                "blurhash": "mGD+}Dof%gxu00WWIUV@?woexZfl-:bHx]axMxWBE1a#_2ofNGj@"
             }
         ],
         "profileImgCounterTitle": "Количество фотографий",

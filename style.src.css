@@ -265,6 +265,47 @@ p img {
     @apply un-cursor-zoom-in;
 }
 
+#profile-wrapper {
+    isolation: isolate;
+}
+
+/* 给图片堆叠的上侧留出不被 #profile-links-content 的 overflow 裁掉的空间。 */
+#profile-links-content {
+    --profile-stack-overflow-space: max(2.5rem, 8%);
+    padding-top: var(--profile-stack-overflow-space);
+    margin-top: calc(-1 * var(--profile-stack-overflow-space));
+}
+
+#profile-stack[hidden] {
+    @apply un-hidden;
+}
+
+.profile-stack-card {
+    @apply un-absolute un-inset-0 un-bg-bg-scnd un-bg-cover un-bg-center un-bg-no-repeat;
+    /* border: 1px solid color-mix(in srgb, var(--tide-color-text-primary) 40%, transparent);
+    border-radius: 0.5rem; */
+    transform-origin: center;
+}
+
+.profile-stack-card[data-depth="1"] {
+    @apply un-z-1;
+    transform: translate(6%, -3.2%) rotate(4deg) scale(0.96);
+}
+
+.profile-stack-card[data-depth="2"] {
+    @apply un-z-0;
+    transform: translate(12.5%, -7%) rotate(8deg) scale(0.92);
+}
+
+#profile {
+    @apply un-relative
+    @apply un-z-2;
+}
+
+#profile-img-counter {
+    @apply un-z-3;
+}
+
 blockquote {
     @apply un-py-2 un-px-4;
     @apply un-my-4 un-mx-0;
@@ -505,6 +546,10 @@ summary {
     }
 
     #utils {
+        @apply un-hidden;
+    }
+
+    #profile-stack {
         @apply un-hidden;
     }
 }
