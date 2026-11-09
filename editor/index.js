@@ -23,6 +23,13 @@ const panelsElement = document.getElementById('panels');
 const statusElement = document.getElementById('status');
 const saveButton = document.getElementById('save-button');
 const reloadButton = document.getElementById('reload-button');
+const toolbarElement = document.querySelector('.toolbar');
+function syncToolbarHeight() {
+    document.documentElement.style.setProperty('--toolbar-height', `${toolbarElement.offsetHeight}px`);
+}
+if ('ResizeObserver' in window) new ResizeObserver(syncToolbarHeight).observe(toolbarElement);
+else window.addEventListener('resize', syncToolbarHeight);
+syncToolbarHeight();
 function setStatus(message, kind = '') {
     statusElement.textContent = message;
     statusElement.className = `status ${kind}`;

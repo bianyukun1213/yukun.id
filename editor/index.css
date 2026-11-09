@@ -130,13 +130,19 @@ a {
 }
 
 .panel-header {
+    position: sticky;
+    top: var(--toolbar-height, 0px);
+    z-index: 5;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: .75rem;
-    padding-bottom: .75rem;
+    margin: -1rem -1rem 0;
+    padding: 1rem 1rem .75rem;
+    background: inherit;
     border-bottom: 1px solid #e2e5e8;
+    border-radius: calc(.6rem - 1px) calc(.6rem - 1px) 0 0;
 }
 
 .panel-header h2 {
